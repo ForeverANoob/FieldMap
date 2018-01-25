@@ -13,14 +13,21 @@ public class Node {
     private ArrayList<Node> connected = new ArrayList<Node>();
     private String id;
 
-    public Node(String id, ArrayList conn){
+    public Node(String i, ArrayList conn){
         connected = conn;
-        id = id;
+        this.id = i;
     }
-    public Node(String id){
-        id = id;
+    public Node(String i){
+        this.id = i;
     }
-
+    public int getX(){
+        String[] tmp = id.split(" ");
+        return Integer.parseInt(tmp[0]);
+    }
+    public int getY(){
+        String[] tmp = id.split(" ");
+        return Integer.parseInt(tmp[1]);
+    }
     public void setConnected(ArrayList conn){
         connected = conn;
     }
@@ -33,5 +40,13 @@ public class Node {
     }
     public ArrayList<Node> getConnection(){
         return connected;
+    }
+
+    public String toString(){
+        String string = "["+this.id+"]: ";
+        for (int i = 0; i < connected.size(); i++){
+            string += "["+connected.get(i).getId()+"] ";
+        }
+        return string;
     }
 }

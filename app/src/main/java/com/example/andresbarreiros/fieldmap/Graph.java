@@ -15,52 +15,44 @@ public class Graph {
     ArrayList<Node> graph = new ArrayList<Node>();  // store graph
     Node root = null;                               // store current point
     Node end = null;                                // store end-point - may be null
+    int walls = 0;
 
 
-    public Graph(Map map){   //
+    public Graph(Map map){   // this one
         // generate graph
+
         int[][] tmp = map.getMap();
-        for (int i = 0; i < map.getWidth(); i++){
-            for (int j = 0; j < map.getHeight(); j++){
-                if (tmp[i][j] != 1){
-                    String id = Integer.toString(i)+Integer.toString(j);
+        for (int i = 0; i < map.getWidth(); i++){ // x
+            for (int j = 0; j < map.getHeight(); j++){  // y
+
+                    String id = Integer.toString(i)+" "+Integer.toString(j);
                     Node n = new Node(id);
-                    if (i != 0 || tmp[i-1][j] != 1){
-                        Node left = graph.get((j*map.getWidth())+i-1); // the last element currently in the arraylist
+                    //System.err.println(i+" " + j);
+                    if (i != 0 && tmp[i-1][j] != 1){ // left
+                        Node left = graph.get(graph.size() - map.getHeight()); //
                         left.addNode(n);
                         n.addNode(left);
                     }
-                    if (j != 0 || tmp[i][j-1] != 1){
-                        Node top = graph.get((j-1)*map.getWidth()+i); //
+                    if (j != 0 && tmp[i][j-1] != 1){ // above
+                        Node top = graph.get(graph.size() - 1); // the last element currently in the arraylist
                         top.addNode(n);
                         n.addNode(top);
                     }
                     graph.add(n); // should it matter where this is added?
-                }
+                    if(tmp[i][j] == 1){
+                        walls++;
+                    }
             }
         }
 
-    }
-
-    public void Graph(Node n, int h, int w){
-        if (h >= 25 || w >= 25){    // don't hard code it
-            return;
-        }
-        Node right = new Node(Integer.toString(w+1)+Integer.toString(h));
-        Node bottom = new Node(Integer.toString(w)+Integer.toString(h+1));
-
-        n.addNode(right);
-        n.addNode(bottom);
-        bottom.addNode(n);
-        right.addNode(n);
-
-        Graph(right, h, w+1);
-        Graph(bottom, h+1, w);
+        //for (int i = 0; i < graph.size(); i++){
+          //  System.err.println(graph.get(i).toString());
+        //}
     }
 
     private Node searchNode(String id){
         for (int i = 0; i < graph.size(); i++){
-            if (graph.get(i).equals(id)){
+            if (graph.get(i).getId().equals(id)){
                 return graph.get(i);
             }
         }
@@ -73,10 +65,12 @@ public class Graph {
         assert(root!=null); // shouldn't trigger
     }
 
-    public void setEndPoint(String id){
+
+    public Stack<Node> setEndPoint(String id){
         // set end point
         end = searchNode(id);
         assert(end!=null);  // shouldn't trigger
+        return getPath();
     }
 
     public Stack<Node> getPath(){       // should work
@@ -89,8 +83,9 @@ public class Graph {
         level.add(new Leaf(root, null));
         doneNode.add(root.getId());
         //path.add(root);
+        //System.out.println(root.toString() + " " + end.toString());
 
-        while (doneNode.size() < graph.size()) { // also exits when nextlevel.size() == 0
+        while (doneNode.size() < (graph.size()-walls-10) ) { // also exits when nextlevel.size() == 0
 
             for (int i = 0; i < level.size(); i++) { // iterate throught the level
 
@@ -100,7 +95,8 @@ public class Graph {
                     if (tmp.get(j).getId().equals(end.getId())){ // check if child is end node
                         // end point found
                         // now find the path
-                        this.getParents(new Leaf(tmp.get(j), level.get(i)), path);
+                        System.err.println("Found it!!!!!!!!!!!!!!!");
+                        return this.getParents(new Leaf(tmp.get(j), level.get(i)), path);
                     }
 
                     if (!doneNode.contains(tmp.get(j).getId())) {   // prepare the next level
@@ -111,12 +107,12 @@ public class Graph {
             }
             // nextlevel becomes current level
             level = nextlevel;
-            nextlevel.clear();
+            nextlevel = new ArrayList<Leaf>();
         }
         return path;
     }
 
-    private Stack<Node> getParents(Leaf l, Stack<Node> path){
+    private Stack<Node> getParents(Leaf l, Stack<Node> path){ // not that path is intially empty
 
         path.push(l);
         while (l.getParent() != null){

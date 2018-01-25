@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Leaf extends Node{
 
-    private Leaf parent;
+    private Leaf parent = null;
 
     public Leaf(String id, Leaf p){
         super(id);
@@ -19,6 +19,9 @@ public class Leaf extends Node{
     public Leaf(Node n, Leaf p){
         super(n.getId(), n.getConnection());
         parent = p;
+    }
+    public Leaf(Node n){
+        super(n.getId(), n.getConnection());
     }
 
     public Leaf getParent(){

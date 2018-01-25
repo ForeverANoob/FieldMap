@@ -1,4 +1,7 @@
 package com.example.andresbarreiros.fieldmap;
+import android.graphics.Rect;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +20,7 @@ public class Map {
         HEIGHT = h;
         WIDTH = w;
         map = new int[WIDTH][HEIGHT];
+
     }
 
     public int getHeight(){
@@ -26,19 +30,33 @@ public class Map {
         return this.WIDTH;
     }
 
-    public Map(List<Rectangle> lst){
+    public void makeMap(ArrayList<Rect> lst){
         for (int a = 0; a < lst.size(); a++){
-            for (int i = lst.get(a).getX(); i < lst.get(a).getWidth(); i++){
-                for (int j = lst.get(a).getY(); j < lst.get(a).getHeight(); j++){
-                    map[i][j] = 1;
+            for (int i = lst.get(a).left; i < lst.get(a).right; i+=Values.TILESIZE){
+                for (int j = lst.get(a).top; j < lst.get(a).bottom; j+=Values.TILESIZE){
+                    if (i/Values.TILESIZE >= 51 || i/Values.TILESIZE >= 95){
+                        continue;
+                    }
+                    map[(i/Values.TILESIZE)][(j/Values.TILESIZE)] = 1;
                 }
+                System.err.println();
             }
         }
+        //toString();
     }
 
     public int[][] getMap(){
         return this.map;
     }
 
-
+    public String toString(){
+        for (int i = 0; i < WIDTH; i++){
+            for (int j = 0; j < HEIGHT; j++){
+                System.out.print(map[i][j]);
+            }
+            System.out.println();
+        }
+        System.err.println();
+        return "";
+    }
 }
