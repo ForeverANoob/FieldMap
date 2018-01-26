@@ -77,7 +77,7 @@ public class SaveFile {
     public ArrayList<Rect> getTestData(){
         ArrayList<Rect> data = new ArrayList<Rect>();
         data.add(new Rect(0,100,400,800));
-        data.add(new Rect(500,400,1080,1000));
+        data.add(new Rect(500,400,1100,1000));
         data.add(new Rect(300,1300,600,1500));
 
         return data;

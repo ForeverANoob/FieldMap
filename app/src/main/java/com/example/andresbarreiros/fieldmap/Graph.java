@@ -66,11 +66,11 @@ public class Graph {
     }
 
 
-    public Stack<Node> setEndPoint(String id){
+    public void setEndPoint(String id){
         // set end point
         end = searchNode(id);
-        assert(end!=null);  // shouldn't trigger
-        return getPath();
+        //assert(end!=null);  // shouldn't trigger
+        //return getPath();
     }
 
     public Stack<Node> getPath(){       // should work
@@ -92,10 +92,10 @@ public class Graph {
                 ArrayList<Node> tmp = level.get(i).getConnection();
                 for (int j = 0; j < tmp.size(); j++) { // check children
 
-                    if (tmp.get(j).getId().equals(end.getId())){ // check if child is end node
+
+                    if (end != null && tmp.get(j).getId().equals(end.getId())){ // check if child is end node
                         // end point found
                         // now find the path
-                        System.err.println("Found it!!!!!!!!!!!!!!!");
                         return this.getParents(new Leaf(tmp.get(j), level.get(i)), path);
                     }
 
