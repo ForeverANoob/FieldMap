@@ -44,7 +44,6 @@ public class Graph {
                     }
             }
         }
-
         //for (int i = 0; i < graph.size(); i++){
           //  System.err.println(graph.get(i).toString());
         //}
@@ -85,7 +84,7 @@ public class Graph {
         //path.add(root);
         //System.out.println(root.toString() + " " + end.toString());
 
-        while (doneNode.size() < (graph.size()-walls-10) ) { // also exits when nextlevel.size() == 0
+        while (level.size() > 0 ) { // also exits when nextlevel.size() == 0
 
             for (int i = 0; i < level.size(); i++) { // iterate throught the level
 

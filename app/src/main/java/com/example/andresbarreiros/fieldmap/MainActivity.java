@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.SeekBar;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class MainActivity extends Activity implements View.OnTouchListener {
 
+    private static SeekBar seekbar;
     AnimationDrawable anime;
     private  SaveFile save;;
     private boolean isTouch = false;
@@ -34,7 +36,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         Values.SCREEN_HEIGHT = size.y;
 
         save = new SaveFile(this,"testFieldMap.txt");
-        rect = save.getTestData();
+        rect = save.getTestRoom();
 
         user = new FindUser();
         Map map = new Map(51, 96);
@@ -48,6 +50,31 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         setContentView(new CustomView(this, rect, path, user, graph));
 
+    }
+
+    public void seekBar(){
+        seekbar = (SeekBar)findViewById(R.id.seekBar);
+        seekbar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+
+                    int progress_value;
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                        progress_value = i;
+
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+        // System.out.println(seekbar.get);
     }
 
     // these two don't do anything

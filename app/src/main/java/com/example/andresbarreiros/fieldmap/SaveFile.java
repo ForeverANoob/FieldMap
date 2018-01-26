@@ -82,4 +82,27 @@ public class SaveFile {
 
         return data;
     }
+
+    public ArrayList<Rect> getTestRoom(){
+        ArrayList<Rect> data = new ArrayList<Rect>();
+        data.add(new Rect(0,0,160,120));
+        data.add(new Rect(240,0,600,80));
+        data.add(new Rect(0,240,160,320));
+        data.add(new Rect(240,200,600,280));
+        data.add(new Rect(640,80,720,560));
+        data.add(new Rect(0,440,160,520));
+        data.add(new Rect(240,400,600,480));
+        data.add(new Rect(0,600,160,680));
+        data.add(new Rect(240,600,600,960));
+        data.add(new Rect(640,600,680,920));
+        data.add(new Rect(0,760,160,840));
+        data.add(new Rect(0,920,160,1080));
+        data.add(new Rect(640,960,720,1000));
+        data.add(new Rect(600,1000,720,1080));
+
+        data.add(new Rect(0,1040,720,1080));
+        data.add(new Rect(720,40,760,1080));
+
+        return data;
+    }
 }

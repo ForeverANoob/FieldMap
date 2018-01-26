@@ -12,7 +12,7 @@ public class FindUser {
 
     public FindUser(){
         loc[0] = 450;
-        loc[1] = 1700;
+        loc[1] = 1000;
     }
 
     public int[] getLoc(){

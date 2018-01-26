@@ -65,7 +65,7 @@ public class CustomView extends View {
             Node n = stack.pop();
             while ( !stack.empty() ){
                 Node m = stack.pop();
-                canvas.drawLine(n.getX()*Values.TILESIZE+20, n.getY()*Values.TILESIZE+20, m.getX()*Values.TILESIZE+20, m.getY()*Values.TILESIZE+20, path);
+                canvas.drawLine(n.getX()*Values.TILESIZE+20, n.getY()*Values.TILESIZE+0, m.getX()*Values.TILESIZE+20, m.getY()*Values.TILESIZE+0, path);
                 n = m;
             }
         }else{ /* should notify that that point does not exist */ }
@@ -78,6 +78,8 @@ public class CustomView extends View {
         int Y = (int) event.getY();
         graph.setEndPoint(X/Values.TILESIZE + " " + Y/Values.TILESIZE);
         super.draw(new Canvas());
+        //this.setScaleX(2f);
+        //this.setScaleY(2f);
         invalidate();
         return true;
     }
