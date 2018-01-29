@@ -47,6 +47,8 @@ public class Classifier {
 
         for (Floor.Room room: allRooms){
 
+            float roomscore = 0;
+
             List<Floor.Area> roomAreas = room.getAreas();
             for (Floor.Area area: roomAreas){
 
@@ -55,6 +57,12 @@ public class Classifier {
 
                     String address = mac.getAddress();
 
+                    if (finalprint.containsKey(address)) {
+
+                        FingerprintEntry checkAgainst = new FingerprintEntry(address,mac.getHighRead(),mac.getLowRead());
+                        roomscore += checkAgainst.scoreMac(finalprint.get(address));
+
+                    }
 
                 }
 
