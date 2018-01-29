@@ -10,23 +10,20 @@ import java.util.List;
 
 public class Classifier {
 
-    List<FingerprintEntry> fingerprint = new ArrayList<>();
+    List<ScanResult> fingerprint = new ArrayList<>();
+    Floor workingFloor;
+    Context appContext;
 
-    public Classifier(){
+    public Classifier(Floor source, Context context){
 
-        fingerprint = new ArrayList<>();
-
-    }
-
-    public Classifier(Floor source){
-
-
+        workingFloor = source;
+        appContext = context;
 
     }
 
-    public List<ScanResult> getScan (Context appContext){
+    public List<ScanResult> getScan (){
 
-        WifiManager wifi = (WifiManager) appContext.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifi = (WifiManager) appContext.getSystemService(appContext.WIFI_SERVICE);
         List<ScanResult> results;
         wifi.startScan();
 
@@ -36,26 +33,27 @@ public class Classifier {
 
     }
 
-    public void setFingerprint(ArrayList<String> list){
+    public Floor.Room getRoomID(){
 
-        for (int k = 0; k<=list.size();k++) {
+        fingerprint = getScan();
+        List<Floor.Room> allRooms = workingFloor.getRooms();
 
-            ArrayList<String> set = new ArrayList<String>();
-            set = (ArrayList<String>) Arrays.asList(list.get(k).split(","));
+        for (Floor.Room room: allRooms){
+
+            List<Floor.Area> roomAreas = room.getAreas();
+            for (Floor.Area area: roomAreas){
+
+                List<Floor.Mac> areaMacs = area.getMacs();
+                for (Floor.Mac mac: areaMacs){
+
+
+
+                }
+
+            }
+
 
         }
-
-    }
-
-    public float getWholeScore(ArrayList<ScanResult> scan){
-
-        for (int k=0;k<scan.size();k++) {
-
-
-
-        }
-
-        return(30);
 
     }
 

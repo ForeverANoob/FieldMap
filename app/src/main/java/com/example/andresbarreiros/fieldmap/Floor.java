@@ -1,4 +1,5 @@
-package com.example.andresbarreiros.fieldmap; /**
+package com.example.andresbarreiros.fieldmap;
+/**
  * Created by Nyashadzaishe Bryan on 26/1/2018.
  */
 
