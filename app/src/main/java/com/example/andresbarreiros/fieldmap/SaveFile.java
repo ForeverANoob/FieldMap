@@ -35,11 +35,19 @@ public class SaveFile extends Activity{
 
     public SaveFile(Context context, String name) {
         filename = name;
+        try (PrintWriter writer = new PrintWriter("test.txt", "UTF-8")) {
+            writer.write("Hope this works");
+            writer.close();
+        }catch(IOException e){ e.printStackTrace(); }
     }
 
     public void writeToFile(String localops){
         file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
+        file.getParentFile().mkdirs();
         try {
+            if(!file.exists()) // Create the file if it does not exist.
+                file.createNewFile();
+            file.setReadable(true, false);
             System.err.println(file.exists());
             output = new FileOutputStream(file);
             output.write(localops.getBytes());

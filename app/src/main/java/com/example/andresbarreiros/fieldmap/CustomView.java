@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.support.constraint.solver.widgets.Rectangle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class CustomView extends View {
     private Paint barriers;
     private Paint path;
     private Paint user;
+    private ScaleGestureDetector mScaleDetector;
+    private boolean drawPath = true;
+
 
     public CustomView(Context context, ArrayList<Rect> r, Stack<Node> s, FindUser us, Graph g){
         super(context);
@@ -49,6 +53,22 @@ public class CustomView extends View {
 
         path.setStrokeWidth(15);        // making lines THICC again
         path.setStyle(Paint.Style.STROKE);
+
+        mScaleDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.OnScaleGestureListener() {
+            @Override
+            public void onScaleEnd(ScaleGestureDetector detector) {
+            }
+            @Override
+            public boolean onScaleBegin(ScaleGestureDetector detector) {
+                return true;
+            }
+            @Override
+            public boolean onScale(ScaleGestureDetector detector) {
+                //Log.d(LOG_KEY, "zoom ongoing, scale: " + detector.getScaleFactor());
+                System.err.println(detector.isQuickScaleEnabled());
+                return false;
+            }
+        });
 
     }
 
@@ -74,15 +94,18 @@ public class CustomView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
+
+        mScaleDetector.onTouchEvent(event);
         int X = (int) event.getX();
         int Y = (int) event.getY();
         graph.setEndPoint(X/Values.TILESIZE + " " + Y/Values.TILESIZE);
+
+        this.setScaleX((float) (1*mScaleDetector.getScaleFactor()));
+        this.setScaleY((float) (1*mScaleDetector.getScaleFactor()));
+
         super.draw(new Canvas());
-        //this.setScaleX(2f);
-        //this.setScaleY(2f);
         invalidate();
         return true;
     }
-
 
 }
