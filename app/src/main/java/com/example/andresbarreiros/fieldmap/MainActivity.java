@@ -37,6 +37,9 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         save = new SaveFile(this,"testFieldMap.txt");
         rect = save.getTestRoom();
+        save.writeToFile(save.toString());
+
+        System.err.println("In it, this is written "+save.readFromFile(this));
 
         user = new FindUser();
         Map map = new Map(51, 96);

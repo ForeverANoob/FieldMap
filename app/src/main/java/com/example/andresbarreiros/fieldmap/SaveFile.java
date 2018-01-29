@@ -1,15 +1,21 @@
 package com.example.andresbarreiros.fieldmap;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Rect;
+import android.os.Environment;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,43 +25,58 @@ import java.util.Scanner;
  * Created by Andre S Barreiros on 1/25/2018.
  */
 
-public class SaveFile {
+public class SaveFile extends Activity{
 
-    private File f;
+    private String filename = "";
+    private File file;
     private FileOutputStream output = null;
     private BufferedReader input = null;
     private PrintWriter writer = null;
 
-    public SaveFile(Context context, String filename) {
+    public SaveFile(Context context, String name) {
+        filename = name;
+    }
 
-
+    public void writeToFile(String localops){
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
         try {
-            f = new File(context.getFilesDir(), filename);
-            f.createNewFile();
-
-            /*output = context.openFileOutput(filename, Context.MODE_PRIVATE); // not needed?
-            byte[] data1={1,1,0,0};
-            OutputStream fo = new FileOutputStream(f);
-            fo.write(data1);
-            fo.close();
-            System.err.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            writer = new PrintWriter(filename, "UTF-8"); // this doesn't work
-            input = new BufferedReader(new FileReader(filename));*/
-
+            System.err.println(file.exists());
+            output = new FileOutputStream(file);
+            output.write(localops.getBytes());
+            output.close();
         } catch (Exception e) {
-            System.out.println("Creating a file didnt work");
             e.printStackTrace();
         }
     }
 
-    public void writeToFile(ArrayList<Rect> tmp){
-        for (int i = 0; i < tmp.size(); i++){
-            System.err.println(tmp.get(i).toString());
-            writer.write(tmp.get(i).toString());
-        }
+    public String readFromFile(Context context){
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(context.getAssets().open(filename)));
+
+            // do reading, usually loop until end of file reading
+            StringBuilder sb = new StringBuilder();
+            String mLine = reader.readLine();
+            while (mLine != null) {
+                sb.append(mLine); // process line
+                mLine = reader.readLine();
+            }
+            reader.close();
+            return sb.toString();
+        }catch(IOException e){ e.printStackTrace(); return "Error"; }
     }
 
+
+
+
+
+
+
+
+
     public ArrayList<Rect> readFile(){
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filename);
+
         ArrayList<Rect> rects = new ArrayList<Rect>();
         String[] tmp;
 
@@ -101,8 +122,16 @@ public class SaveFile {
         data.add(new Rect(600,1000,720,1080));
 
         data.add(new Rect(0,1040,720,1080));
-        data.add(new Rect(720,40,760,1080));
+        data.add(new Rect(720,0,760,1080));
 
+        return data;
+    }
+
+    public String toString(ArrayList<Rect> rects){
+        String data = "";
+        for (int i = 0; i < rects.size(); i++){
+            data += rects.get(i).toString() + '\n';
+        }
         return data;
     }
 }
