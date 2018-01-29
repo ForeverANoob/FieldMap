@@ -6,8 +6,10 @@ import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.SeekBar;
 
@@ -36,9 +38,9 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         Values.SCREEN_HEIGHT = size.y;
 
         //AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
-        save = new SaveFile(this,"/testFieldMap.txt");
+        save = new SaveFile(this,"testFieldMap.txt");
         rect = save.getTestRoom();
-        save.writeToFile(save.toString());
+        //save.writeToFile(save.toString());
 
         System.err.println("In it, this is written "+save.readFromFile(this));
 
@@ -81,23 +83,10 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         // System.out.println(seekbar.get);
     }
 
-    // these two don't do anything
+    // does nothing
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        int X = (int) event.getX();
-        int Y = (int) event.getY();
-        //graph.setEndPoint(X/Values.TILESIZE + " " + Y/Values.TILESIZE);
-
-        //new CustomView(this, rect, path, user).onTouchEvent(event);
-        return true;
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        int X = (int) event.getX();
-        int Y = (int) event.getY();
-        System.err.println("another stuff");
-        return true;
-    }
 }
