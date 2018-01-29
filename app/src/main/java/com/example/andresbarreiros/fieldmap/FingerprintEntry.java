@@ -41,7 +41,7 @@ public class FingerprintEntry {
     public float scoreMac(int str){
 
 
-        float avg = (this.getMin_strength()+this.getMax_strength())/2;
+        float avg = (float) ((this.getMin_strength()+this.getMax_strength())/2.0);
         float range = Math.abs(this.getMax_strength() - this.getMin_strength());
         range *= 1.2;
 
