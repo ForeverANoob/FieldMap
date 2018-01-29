@@ -35,7 +35,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         Values.SCREEN_WIDTH = size.x;
         Values.SCREEN_HEIGHT = size.y;
 
-        save = new SaveFile(this,"testFieldMap.txt");
+        //AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
+        save = new SaveFile(this,"/testFieldMap.txt");
         rect = save.getTestRoom();
         save.writeToFile(save.toString());
 
