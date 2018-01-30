@@ -45,6 +45,10 @@ public class Classifier {
         this.getScan();
         List<Floor.Room> allRooms = workingFloor.getRooms();
 
+        Floor.Room likelyRoom = null;
+
+        float roomMax = -40;
+
         for (Floor.Room room: allRooms){
 
             float roomscore = 0;
@@ -68,8 +72,17 @@ public class Classifier {
 
             }
 
+            if (roomscore > roomMax) {
+
+                roomMax = roomscore;
+                likelyRoom = room;
+
+            }
+
 
         }
+
+        return likelyRoom;
 
     }
 
