@@ -3,7 +3,6 @@ package com.example.andresbarreiros.fieldmap;
 import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-
 import java.util.*;
 
 public class Classifier {
@@ -20,7 +19,6 @@ public class Classifier {
     }
 
     public Classifier(){
-
 
     }
 
@@ -75,7 +73,6 @@ public class Classifier {
 
                     }
 
-
                 }
 
                 roomscore = roomscore/divcount;
@@ -88,7 +85,6 @@ public class Classifier {
                 likelyRoom = room;
 
             }
-
 
         }
 
