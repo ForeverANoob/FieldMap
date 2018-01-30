@@ -50,6 +50,9 @@ public class Floor{
         return this.listOfRooms.contains(room);
     }
 
+    public String toString(){
+        return this.getFloorName();
+    }
     /* Room Class */
 
     class Room{
