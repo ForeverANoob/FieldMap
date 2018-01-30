@@ -67,6 +67,12 @@ public class Classifier {
                         roomscore += checkAgainst.scoreMac(finalprint.get(address));
 
                     }
+                    else {
+
+                        roomscore -= 0.1;
+
+                    }
+
 
                 }
 
