@@ -4,6 +4,7 @@ public class FingerprintEntry {
     private int min_strength;
     private int max_strength;
     private String mac_address;
+    private float rangemult = (float) 1.2;
 
 
     public FingerprintEntry(String mac_address, int max_strength, int min_strength){
@@ -41,9 +42,9 @@ public class FingerprintEntry {
     public float scoreMac(int str){
 
 
-        float avg = (this.getMin_strength()+this.getMax_strength())/2;
+        float avg = (float) ((this.getMin_strength()+this.getMax_strength())/2.0);
         float range = Math.abs(this.getMax_strength() - this.getMin_strength());
-        range *= 1.2;
+        range *= rangemult;
 
         float score = 0;
 
