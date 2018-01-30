@@ -1,5 +1,6 @@
 package com.example.andresbarreiros.fieldmap;
 
+import android.graphics.Rect;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
@@ -24,6 +25,8 @@ public class Rectangle {
     private int height;
     private int width;
     private float rotation; // should not be used
+    private Rect rect;
+    private String name;
 
     public Rectangle(int x, int y, int h, int w){
         this.x = x;
@@ -31,7 +34,13 @@ public class Rectangle {
         height = h;
         width = w;
     }
+    public Rectangle(Rect r, String n){
+        rect = r;
+        name = n;
+    }
 
+    public Rect getRect(){ return this.rect; }
+    public String getName(){ return this.name; }
     public int getX(){
         return x;
     }

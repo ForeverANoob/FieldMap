@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -23,6 +24,7 @@ public class CustomView extends View {
     private Stack<Node> stack;
     private FindUser u;
     private ArrayList<Rect> rs;
+    private ArrayList<Rect> rm;
     private Graph graph;
     private Canvas c;
 
@@ -30,26 +32,33 @@ public class CustomView extends View {
     private Paint barriers;
     private Paint path;
     private Paint user;
+    private Paint r1;
+    private Paint r2;
     private ScaleGestureDetector mScaleDetector;
     private boolean drawPath = true;
 
 
-    public CustomView(Context context, ArrayList<Rect> r, Stack<Node> s, FindUser us, Graph g){
+    public CustomView(Context context, ArrayList<Rect> r, ArrayList<Rect> ro,  Stack<Node> s, FindUser us, Graph g){
         super(context);
 
         graph = g;
         this.u = us;
         this.rs = r;
+        this.rm = ro;
         stack = s;
         background = new Paint();
         barriers = new Paint();
         path = new Paint();
         user = new Paint();
+        r1 = new Paint();
+        r2 = new Paint();
 
         background.setColor(Color.parseColor("#3394cc")); // 0x3394cc
         barriers.setColor(Color.parseColor("#00007F")); // 0xaaaaaa
         path.setColor(Color.parseColor("#FFA500"));
         user.setColor(Color.parseColor("#670000"));
+        r1.setColor(Color.parseColor("#67000001"));
+        r2.setColor(Color.parseColor("#110001"));
 
         path.setStrokeWidth(15);        // making lines THICC again
         path.setStyle(Paint.Style.STROKE);
@@ -90,6 +99,11 @@ public class CustomView extends View {
             }
         }else{ /* should notify that that point does not exist */ }
         canvas.drawCircle(u.getLoc()[0]+10, u.getLoc()[1], 15, user);
+
+        for (int i = 0; i < rm.size(); i++){
+            if (i%2 == 0){ canvas.drawRect(rm.get(i), r1); }
+            else { canvas.drawRect(rm.get(i), r2); }
+        }
     }
 
     @Override

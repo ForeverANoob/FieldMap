@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.SeekBar;
 
@@ -24,6 +21,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     private boolean isTouch = false;
     private Graph graph;
     ArrayList<Rect> rect;
+    ArrayList<Rect> rooms;
     FindUser user;
     Stack<Node> path;
 
@@ -37,24 +35,28 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         Values.SCREEN_WIDTH = size.x;
         Values.SCREEN_HEIGHT = size.y;
 
-        //AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
         save = new SaveFile(this,"testFieldMap.txt");
         rect = save.getTestRoom();
-        //save.writeToFile(save.toString());
+        rooms = save.getLookUp();
 
-        System.err.println("In it, this is written "+save.readFromFile(this));
+        /* User info */
+        Floor floor = new Floor(); // TODO: do this properly (gettting from the database)
+        Classifier cls = new Classifier(floor, this);
+        user = new FindUser();  // TODO: delete this line (when it doesn't break stuff)
+        Floor.Room room = cls.getRoomID(); // user is in here
+        user.setLoc(room, rooms);
 
-        user = new FindUser();
+        /* Floor info */
+        //System.err.println("In it, this is written "+save.readFromFile(this));
         Map map = new Map(51, 96);
         map.makeMap(rect);
 
         graph = new Graph(map);
-        graph.setLocation(Integer.toString(user.getLoc()[0]/Values.TILESIZE)+" "+Integer.toString(user.getLoc()[1]/Values.TILESIZE));
-        graph.setEndPoint("1 2");
-        //path = graph.getPath();
-        //save.writeToFile(rect);
 
-        setContentView(new CustomView(this, rect, path, user, graph));
+        graph.setLocation(Integer.toString(user.getLoc()[0]/Values.TILESIZE)+" "+Integer.toString(user.getLoc()[1]/Values.TILESIZE)); // set user location
+        //graph.setEndPoint("1 2");
+
+        setContentView(new CustomView(this, rect, rooms, path, user, graph));
 
     }
 

@@ -135,6 +135,26 @@ public class SaveFile extends Activity{
         return data;
     }
 
+    public ArrayList<Rect> getLookUp(){ // location of the room
+        ArrayList<Rect> rooms = new ArrayList<Rect>();
+        rooms.add(new Rect(0,0,240,240));         // vr
+        rooms.add(new Rect(240,0,600,240));       // designers
+        rooms.add(new Rect(600, 0, 720, 240));  // escape
+        rooms.add(new Rect(0,240,240,480));       // Window 1
+        rooms.add(new Rect(240,240, 600,480));    // Desks
+        rooms.add(new Rect(600, 240, 720, 480));  // wall
+        rooms.add(new Rect(0,480,240,720));       // window 2
+        rooms.add(new Rect(240,480,600,600));     // benches
+        rooms.add(new Rect(600,480,720,720));     //kitchen
+        rooms.add(new Rect(0,720,240,960));       // window 3
+        rooms.add(new Rect(600, 720,720,960));    // lounge
+        rooms.add(new Rect(0, 960, 240, 1080));   // reception
+        rooms.add(new Rect(240, 960, 480, 1080)); // entrance
+        rooms.add(new Rect(480, 960, 720, 1080)); // Brainroom
+
+        return rooms;
+    }
+
     public String toString(ArrayList<Rect> rects){
         String data = "";
         for (int i = 0; i < rects.size(); i++){
