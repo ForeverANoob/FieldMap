@@ -52,6 +52,7 @@ public class Classifier {
         for (Floor.Room room: allRooms){
 
             float roomscore = 0;
+            int divcount = 0;
 
             List<Floor.Area> roomAreas = room.getAreas();
             for (Floor.Area area: roomAreas){
@@ -65,6 +66,7 @@ public class Classifier {
 
                         FingerprintEntry checkAgainst = new FingerprintEntry(address,mac.getHighRead(),mac.getLowRead());
                         roomscore += checkAgainst.scoreMac(finalprint.get(address));
+                        divcount += 1;
 
                     }
                     else {
@@ -75,6 +77,8 @@ public class Classifier {
 
 
                 }
+
+                roomscore = roomscore/divcount;
 
             }
 
