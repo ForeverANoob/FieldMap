@@ -3,7 +3,6 @@ package com.example.andresbarreiros.fieldmap;
 import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-
 import java.util.*;
 
 public class Classifier {
@@ -17,7 +16,11 @@ public class Classifier {
         appContext = context;
 
     }
+  
+    public Classifier(){
 
+    }
+  
     public void getScan (){
 
         WifiManager wifi = (WifiManager) appContext.getSystemService(appContext.WIFI_SERVICE);
@@ -67,7 +70,6 @@ public class Classifier {
 
                     }
 
-
                 }
 
                 roomscore = roomscore/divcount;
@@ -80,7 +82,6 @@ public class Classifier {
                 System.out.println("::::::::::::::::::::::::::::::::::::::::::::: "+likelyRoom);
 
             }
-
 
         }
         System.out.println("}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} "+likelyRoom);
