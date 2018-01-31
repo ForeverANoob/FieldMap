@@ -49,9 +49,10 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         Classifier cls = new Classifier(floor, getApplicationContext());
         user = new FindUser();  // TODO: delete this line (when it doesn't break stuff)
         Floor.Room room = cls.getRoomID(); // user is in here
-        System.err.print("++++++++++++++++++++++++++++++++++ "+room);
+        System.err.println("++++++++++++++++++++++++++++++++++ "+room);
         user.setLoc(room, rooms);
 
+        System.err.println(" --------------- " + user.getLoc());
         /* Floor info */
         Map map = new Map(51, 96);
         map.makeMap(rect);
