@@ -18,9 +18,7 @@ public class Floor{
 
     /* Setter methods */
 
-    public void addRoom(Room newRoom){
-        this.listOfRooms.add(newRoom);
-    }
+    public void addRoom(Room newRoom){ this.listOfRooms.add(newRoom);  }
 
     public void setFloorID(int ID){
         this.floorID = ID;

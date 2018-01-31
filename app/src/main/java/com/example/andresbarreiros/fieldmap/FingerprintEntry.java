@@ -60,7 +60,7 @@ public class FingerprintEntry {
         else if (str == avg){
             score = 1;
         }
-
+        System.out.println("score: //////////////////////////////////"+ score);
         return score;
 
     }

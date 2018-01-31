@@ -12,16 +12,15 @@ public class Classifier {
     Context appContext;
 
     public Classifier(Floor source, Context context){
-
         workingFloor = source;
         appContext = context;
 
     }
-
+  
     public Classifier(){
 
     }
-
+  
     public void getScan (){
 
         WifiManager wifi = (WifiManager) appContext.getSystemService(appContext.WIFI_SERVICE);
@@ -46,7 +45,7 @@ public class Classifier {
         Floor.Room likelyRoom = null;
 
         float roomMax = -40;
-
+        System.out.println("shit "+workingFloor+"         "+workingFloor.getRooms());
         for (Floor.Room room: allRooms){
 
             float roomscore = 0;
@@ -61,14 +60,12 @@ public class Classifier {
                     String address = mac.getAddress();
 
                     if (finalprint.containsKey(address)) {
-
                         FingerprintEntry checkAgainst = new FingerprintEntry(address,mac.getHighRead(),mac.getLowRead());
                         roomscore += checkAgainst.scoreMac(finalprint.get(address));
                         divcount += 1;
 
                     }
                     else {
-
                         roomscore -= 0.1;
 
                     }
@@ -80,14 +77,14 @@ public class Classifier {
             }
 
             if (roomscore > roomMax) {
-
                 roomMax = roomscore;
                 likelyRoom = room;
+                System.out.println("::::::::::::::::::::::::::::::::::::::::::::: "+likelyRoom);
 
             }
 
         }
-
+        System.out.println("}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} "+likelyRoom);
         return likelyRoom;
 
     }
