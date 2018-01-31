@@ -17,6 +17,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 
 /* basic rectangle used by Map.java, may not be needed */
+/* Though it may be needed as rooms by extanding android.graphics.Rect */
 
 public class Rectangle {
 

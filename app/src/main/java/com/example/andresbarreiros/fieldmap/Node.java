@@ -13,6 +13,7 @@ public class Node {
     private ArrayList<Node> connected = new ArrayList<Node>();
     private String id;
 
+    /* Constructor */
     public Node(String i, ArrayList conn){
         connected = conn;
         this.id = i;
@@ -20,6 +21,8 @@ public class Node {
     public Node(String i){
         this.id = i;
     }
+
+    /* methods */
     public int getX(){
         String[] tmp = id.split(" ");
         return Integer.parseInt(tmp[0]);
