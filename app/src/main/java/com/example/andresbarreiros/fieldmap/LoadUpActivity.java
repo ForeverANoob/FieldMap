@@ -34,8 +34,6 @@ public class LoadUpActivity extends AppCompatActivity {
                 //Switch to new Intent after CallBack
 
                 Log.w("Database", LoadUpActivity.newFloor.toString());
-
-
                 startActivity(new Intent(LoadUpActivity.this, MainActivity.class));
             }
         });
@@ -51,9 +49,7 @@ public class LoadUpActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Log.w("Database", "Connected!");
-                LoadUpActivity.newFloor = dataSnapshot.getValue(Floor.class);
-                Log.w("Database", dataSnapshot.getValue(Floor.class).toString());
+                LoadUpActivity.newFloor = makeFloorFromDatabase(dataSnapshot);
                 callback.afterGettingData();
             }
 
@@ -63,5 +59,72 @@ public class LoadUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public Floor makeFloorFromDatabase(DataSnapshot dataSnapshot){
+
+        Floor aFloor = new Floor();
+
+        String floorName;
+        int floorID;
+        DataSnapshot roomSnapshot = dataSnapshot.child("Room");
+
+        String roomName;
+        int roomID;
+        Floor.Area anArea;
+        Floor.Room aRoom;
+        DataSnapshot areaSnapshot;
+        Iterable<DataSnapshot> areasSnapshots;
+        int areaID;
+
+        DataSnapshot macSnapshot;
+        Iterable<DataSnapshot> macsSnapshots;
+
+        String macID;
+        int highRead;
+        int lowRead;
+
+        floorName = dataSnapshot.child("floorName").getValue(String.class);
+        floorID = dataSnapshot.child("floorID").getValue(Integer.class);
+
+        aFloor.setFloorID(floorID);
+        aFloor.setFloorName(floorName);
+        Iterable<DataSnapshot> roomsSnapshots = roomSnapshot.getChildren();
+        for (DataSnapshot aSingleRoomSnapShot: roomsSnapshots ) {
+
+            aRoom = aFloor.new Room();
+            roomName = aSingleRoomSnapShot.child("roomName").getValue(String.class);
+            roomID = aSingleRoomSnapShot.child("roomID").getValue(Integer.class);
+
+            areaSnapshot = aSingleRoomSnapShot.child("Area");
+            areasSnapshots = areaSnapshot.getChildren();
+
+            for (DataSnapshot aSingleAreaSnapshot : areasSnapshots) {
+
+                anArea = aFloor.new Area();
+                areaID = aSingleAreaSnapshot.child("areaID").getValue(Integer.class);
+
+                macSnapshot = aSingleAreaSnapshot.child("Mac");
+
+                macsSnapshots = macSnapshot.getChildren();
+
+                for (DataSnapshot aSingleMacSnapshot : macsSnapshots) {
+
+                    macID = aSingleMacSnapshot.child("address").getValue(String.class);
+                    lowRead = aSingleMacSnapshot.child("lowRead").getValue(Integer.class);
+
+                    highRead = aSingleMacSnapshot.child("highRead").getValue(Integer.class);
+                    anArea.addMac(aFloor.new Mac(macID, lowRead, highRead));
+                }
+
+                anArea.setAreaID(areaID);
+                aRoom.addArea(anArea);
+            }
+
+            aRoom.setRoomID(roomID);
+            aRoom.setRoomName(roomName);
+            aFloor.addRoom(aRoom);
+        }
+        return aFloor;
     }
 }
