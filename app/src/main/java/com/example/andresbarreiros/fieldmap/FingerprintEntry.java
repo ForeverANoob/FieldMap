@@ -4,7 +4,7 @@ public class FingerprintEntry {
     private int min_strength;
     private int max_strength;
     private String mac_address;
-    private float rangemult = (float) 1.2;
+    private float rangemult = (float) 1.8;
 
 
     public FingerprintEntry(String mac_address, int max_strength, int min_strength){
