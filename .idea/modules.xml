@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FieldMapTuning.iml" filepath="$PROJECT_DIR$/FieldMapTuning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FieldMap.iml" filepath="$PROJECT_DIR$/FieldMap.iml" />
+      <module fileurl="file://C:\Users\Andre S Barreiros\AndroidStudioProjects\FieldMap\FieldMapTuning.iml" filepath="C:\Users\Andre S Barreiros\AndroidStudioProjects\FieldMap\FieldMapTuning.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

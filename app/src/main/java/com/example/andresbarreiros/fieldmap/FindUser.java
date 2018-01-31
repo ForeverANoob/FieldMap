@@ -25,7 +25,6 @@ public class FindUser {
     }
 
     public int[] setLoc(Floor.Room r, ArrayList<Rect> rooms){ // TODO: make this work as non-hardcoded
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + r + " " + rooms);
         loc[0] = rooms.get(r.getRoomID()-1).centerX();
         loc[1] = rooms.get(r.getRoomID()-1).centerY();
         return loc;
