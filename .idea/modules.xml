@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FieldMap.iml" filepath="$PROJECT_DIR$/FieldMap.iml" />
-      <module fileurl="file://C:\Users\Nyashadzaishe Bryan\AndroidStudioProjects\FieldMapGood\FieldMap.iml" filepath="C:\Users\Nyashadzaishe Bryan\AndroidStudioProjects\FieldMapGood\FieldMap.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FieldMapGood.iml" filepath="$PROJECT_DIR$/FieldMapGood.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Nyashadzaishe Bryan\AndroidStudioProjects\FieldMapGood\app\app.iml" filepath="C:\Users\Nyashadzaishe Bryan\AndroidStudioProjects\FieldMapGood\app\app.iml" />
     </modules>
   </component>
 </project>
