@@ -11,5 +11,5 @@ public class Values {
     public static int LIMIT_X = 1080;   // somewhat dynamic, depends on floor size
     public static int LIMIT_Y = 1920;   // same as above
     public static final int TILESIZE = 40;
-
+    public static float multi = 1;      // multiply drawing scale
 }

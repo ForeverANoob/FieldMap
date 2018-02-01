@@ -62,7 +62,7 @@ public class CustomView extends View {
         barriers.setColor(Color.parseColor("#00007F")); // 0xaaaaaa
         path.setColor(Color.parseColor("#FFA500"));
         user.setColor(Color.parseColor("#670000"));
-        r1.setColor(Color.parseColor("#22222222"));
+        r1.setColor(Color.parseColor("#33333333"));
         r2.setColor(Color.parseColor("#11111111"));
 
         path.setStrokeWidth(15);        // making lines THICC again
@@ -94,21 +94,21 @@ public class CustomView extends View {
         c = canvas;
         canvas.drawColor(Color.parseColor("#808080"));
         for (int i = 0; i < rs.size(); i++){
-            canvas.drawRect(rs.get(i), barriers);
+            canvas.drawRect(rs.get(i).left*Values.multi, rs.get(i).top*Values.multi, rs.get(i).right*Values.multi, rs.get(i).bottom*Values.multi, barriers);
         }
         stack = graph.getPath();
         if (!stack.empty()){
             Node n = stack.pop();
             while ( !stack.empty() ){
                 Node m = stack.pop();
-                canvas.drawLine(n.getX()*Values.TILESIZE+20, n.getY()*Values.TILESIZE+0, m.getX()*Values.TILESIZE+20, m.getY()*Values.TILESIZE+0, path);
+                canvas.drawLine(n.getX()*Values.TILESIZE*Values.multi+20, n.getY()*Values.TILESIZE*Values.multi+0, m.getX()*Values.TILESIZE*Values.multi+20, m.getY()*Values.TILESIZE*Values.multi+0, path);
                 n = m;
             }
         }else{ /* should notify that that point does not exist */ }
-        canvas.drawCircle(u.getLoc()[0]+10, u.getLoc()[1], 15, user);
+        canvas.drawCircle(u.getLoc()[0]*Values.multi+10, u.getLoc()[1]*Values.multi, 15, user);
 
         for (int i = 0; i < rm.size(); i++){
-            if (i%2 == 0){ canvas.drawRect(rm.get(i), r1); }
+            if (i%2 == 0){             canvas.drawRect(rs.get(i).left*Values.multi, rs.get(i).top*Values.multi, rs.get(i).right*Values.multi, rs.get(i).bottom*Values.multi, r1);}
             else { canvas.drawRect(rm.get(i), r2); }
         }
     }

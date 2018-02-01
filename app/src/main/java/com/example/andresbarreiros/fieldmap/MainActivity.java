@@ -39,6 +39,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         display.getSize(size);
         Values.SCREEN_WIDTH = size.x;
         Values.SCREEN_HEIGHT = size.y;
+        Values.multi = (float) (Values.SCREEN_WIDTH/720.0);
+        System.out.println("====================== " + size.x + " "+ size.y + " " + Values.multi);
 
         save = new SaveFile(this,"testFieldMap.txt");
         rect = save.getTestRoom();
