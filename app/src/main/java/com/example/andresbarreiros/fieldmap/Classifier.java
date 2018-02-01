@@ -11,7 +11,13 @@ public class Classifier {
     java.util.Map<String, Integer> finalprint =  new HashMap();
     Floor workingFloor;
     Context appContext;
-    double punish = 0.3;
+    double punish = 0.2;
+
+    public void setPunish(double value){
+
+        this.punish = value;
+
+    }
 
     public Classifier(Floor source, Context context){
         workingFloor = source;
