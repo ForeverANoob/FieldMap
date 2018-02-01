@@ -24,6 +24,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     ArrayList<Rect> rect;
     ArrayList<Rect> rooms;
     FindUser user;
+    Floor floor;
+    Classifier cls;
     Stack<Node> path;
     private Handler handler;
     private int interval = 2000; // 5 seconds
@@ -32,25 +34,23 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     protected void onCreate(Bundle savedInstanceState) {    // 1080 x 1920
         super.onCreate(savedInstanceState);
 
-        handler = new Handler();
         Display display = getWindowManager().getDefaultDisplay(); // these few lines of code is to hoping for proper screen resolution
         Point size = new Point();
         display.getSize(size);
         Values.SCREEN_WIDTH = size.x;
         Values.SCREEN_HEIGHT = size.y;
+        Values.multi = (float) (Values.SCREEN_WIDTH/720.0);
+        System.out.println("====================== " + size.x + " "+ size.y + " " + Values.multi);
 
         save = new SaveFile(this,"testFieldMap.txt");
         rect = save.getTestRoom();
         rooms = save.getLookUp();
 
         /* User info */
-        Floor floor = LoadUpActivity.newFloor;// TODO: do this properly (gettting from the database)
-        System.out.println(floor.getRooms());
-        Classifier cls = new Classifier(floor, getApplicationContext());
+        floor = LoadUpActivity.newFloor;// TODO: do this properly (gettting from the database)
+        cls = new Classifier(floor, getApplicationContext());
         user = new FindUser();  // TODO: delete this line (when it doesn't break stuff)
-        Floor.Room room = cls.getRoomID(); // user is in here
-        System.err.print("++++++++++++++++++++++++++++++++++ "+room);
-        user.setLoc(room, rooms);
+        this.setUserLoc();
 
         /* Floor info */
         Map map = new Map(51, 96);
@@ -58,33 +58,15 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         graph = new Graph(map);
         graph.setLocation(Integer.toString(user.getLoc()[0]/Values.TILESIZE)+" "+Integer.toString(user.getLoc()[1]/Values.TILESIZE)); // set user location
 
-        setContentView(new CustomView(this, rect, rooms, path, user, graph));
+        setContentView(new CustomView(this, rect, rooms, path, user, graph, cls));
+        //handler = new Handler();
+        //startRepeatingTask();
 
     }
 
-    public void seekBar(){
-        seekbar = (SeekBar)findViewById(R.id.seekBar);
-        seekbar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-
-                    int progress_value;
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                        progress_value = i;
-
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
-        // System.out.println(seekbar.get);
+    protected void setUserLoc(){
+        Floor.Room room = cls.getRoomID(); // user is in here
+        user.setLoc(room, rooms);
     }
 
     // does nothing
@@ -93,13 +75,35 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         return false;
     }
 
-    private Runnable runnableCode = new Runnable() { // try this
+
+
+/*
+    Runnable mStatusChecker = new Runnable() {
         @Override
         public void run() {
-            // Do something here on the main thread
-            System.err.println("this alarm should run maybe");
-            handler.postDelayed(this, interval);
+            try {
+                //updateStatus(); //this function can change value of mInterval.
+                setUserLoc();
+                graph.setLocation(Integer.toString(user.getLoc()[0]/Values.TILESIZE)+" "+Integer.toString(user.getLoc()[1]/Values.TILESIZE));
+                System.out.println("+++++++++++++++++++++++++++++++");
+
+
+                //recreate();
+
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                handler.postDelayed(mStatusChecker, interval);
+            }
         }
     };
 
+    void startRepeatingTask() {
+        mStatusChecker.run();
+    }
+
+    void stopRepeatingTask() {
+        handler.removeCallbacks(mStatusChecker);
+    }
+*/
 }

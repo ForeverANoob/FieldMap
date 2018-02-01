@@ -35,10 +35,7 @@ public class SaveFile extends Activity{
 
     public SaveFile(Context context, String name) {
         filename = name;
-        try (PrintWriter writer = new PrintWriter("test.txt", "UTF-8")) {
-            writer.write("Hope this works");
-            writer.close();
-        }catch(IOException e){ e.printStackTrace(); }
+
     }
 
     public void writeToFile(String localops){

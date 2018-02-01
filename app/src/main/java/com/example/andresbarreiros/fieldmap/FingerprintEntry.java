@@ -4,8 +4,20 @@ public class FingerprintEntry {
     private int min_strength;
     private int max_strength;
     private String mac_address;
-    private float rangemult = (float) 1.2;
+    private float rangemult = (float) 1;
 
+    /*
+
+    1;0.08 handles most areas, fails near receiption at desks.
+
+
+     */
+
+    public void setRangemult(float value){
+
+        this.rangemult = value;
+
+    }
 
     public FingerprintEntry(String mac_address, int max_strength, int min_strength){
 
@@ -39,29 +51,27 @@ public class FingerprintEntry {
         this.min_strength = min_strength;
     }
 
-    public float scoreMac(int str){
+    public double scoreMac(int str){
 
 
-        float avg = (float) ((this.getMin_strength()+this.getMax_strength())/2.0);
-        float range = Math.abs(this.getMax_strength() - this.getMin_strength());
+        double avg = (float) ((this.getMin_strength()+this.getMax_strength())/2.0);
+        double range = Math.abs(this.getMax_strength() - this.getMin_strength());
         range *= rangemult;
 
-        float score = 0;
+        double score = 0;
 
-        if ((str <= avg-(range/2)) || (str >= avg+(range/2))){
+        if ((str <= avg-(range/2.0)) || (str >= avg+(range/2.0))){
 
             score = 0;
 
         }
-        else if (str>=this.getMin_strength() && str<=this.getMax_strength() && str != avg){
-
-            score = 1-(Math.abs(str-avg)/(range/2));
+        else if (str != avg){
+            score = 1-(Math.abs(str-avg)/(range/2.0));
 
         }
         else if (str == avg){
             score = 1;
         }
-        System.out.println("score: //////////////////////////////////"+ score);
         return score;
 
     }
