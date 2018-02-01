@@ -4,7 +4,14 @@ public class FingerprintEntry {
     private int min_strength;
     private int max_strength;
     private String mac_address;
-    private float rangemult = (float) 0.8;
+    private float rangemult = (float) 1;
+
+    /*
+
+    1;0.08 handles most areas, fails near receiption at desks.
+
+
+     */
 
     public void setRangemult(float value){
 
