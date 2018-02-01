@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telecom.Call;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,12 +16,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoadUpActivity extends AppCompatActivity {
 
+    ProgressBar progressBar;
     public interface Callback{
 
         void afterGettingData();
     }
 
-    public static Floor newFloor = new Floor();
+    protected static Floor newFloor = new Floor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class LoadUpActivity extends AppCompatActivity {
                 //Switch to new Intent after CallBack
 
                 Log.w("Database", LoadUpActivity.newFloor.toString());
+
                 startActivity(new Intent(LoadUpActivity.this, MainActivity.class));
             }
         });
@@ -97,18 +100,14 @@ public class LoadUpActivity extends AppCompatActivity {
             roomID = aSingleRoomSnapShot.child("roomID").getValue(Integer.class);
 
             areaSnapshot = aSingleRoomSnapShot.child("Area");
-            areasSnapshots = areaSnapshot.getChildren();
-
-            for (DataSnapshot aSingleAreaSnapshot : areasSnapshots) {
+            for (DataSnapshot aSingleAreaSnapshot : areaSnapshot.getChildren()) {
 
                 anArea = aFloor.new Area();
                 areaID = aSingleAreaSnapshot.child("areaID").getValue(Integer.class);
 
                 macSnapshot = aSingleAreaSnapshot.child("Mac");
 
-                macsSnapshots = macSnapshot.getChildren();
-
-                for (DataSnapshot aSingleMacSnapshot : macsSnapshots) {
+                for (DataSnapshot aSingleMacSnapshot : macSnapshot.getChildren()) {
 
                     macID = aSingleMacSnapshot.child("address").getValue(String.class);
                     lowRead = aSingleMacSnapshot.child("lowRead").getValue(Integer.class);
