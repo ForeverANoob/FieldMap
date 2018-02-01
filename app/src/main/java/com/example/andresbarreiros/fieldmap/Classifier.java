@@ -11,7 +11,13 @@ public class Classifier {
     java.util.Map<String, Integer> finalprint =  new HashMap();
     Floor workingFloor;
     Context appContext;
-    double punish = 0.3;
+    double punish = 0.08;
+
+    public void setPunish(double value){
+
+        this.punish = value;
+
+    }
 
     public Classifier(Floor source, Context context){
         workingFloor = source;
@@ -42,7 +48,7 @@ public class Classifier {
 
         Floor.Room likelyRoom = null;
 
-        float roomMax = -40;
+        float roomMax = -300;
         for (Floor.Room room: allRooms){
 
             float roomscore = 0;
@@ -64,7 +70,7 @@ public class Classifier {
                     }
                     else {
                         roomscore -= punish;
-                        //divcount+=1;
+                        //divcount-=1;
 
                     }
 
