@@ -38,7 +38,6 @@ public class CustomView extends View {
     private Paint path;
     private Paint user;
     private Paint r1;
-    private Paint r2;
     private ScaleGestureDetector mScaleDetector;
 
 
@@ -56,17 +55,16 @@ public class CustomView extends View {
         path = new Paint();
         user = new Paint();
         r1 = new Paint();
-        r2 = new Paint();
 
         background.setColor(Color.parseColor("#3394cc")); // 0x3394cc
         barriers.setColor(Color.parseColor("#00007F")); // 0xaaaaaa
         path.setColor(Color.parseColor("#FFA500"));
         user.setColor(Color.parseColor("#670000"));
-        r1.setColor(Color.parseColor("#33333333"));
-        r2.setColor(Color.parseColor("#11111111"));
+        r1.setColor(Color.parseColor("#FFFFFF"));
 
         path.setStrokeWidth(15);        // making lines THICC again
         path.setStyle(Paint.Style.STROKE);
+        r1.setStyle(Paint.Style.STROKE);
 
         mScaleDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.OnScaleGestureListener() {
             @Override
@@ -108,10 +106,8 @@ public class CustomView extends View {
         canvas.drawCircle(u.getLoc()[0]*Values.multi+10, u.getLoc()[1]*Values.multi, 15, user);
 
         for (int i = 0; i < rm.size(); i++){
-            if (i%2 == 0){             canvas.drawRect(rs.get(i).left*Values.multi, rs.get(i).top*Values.multi, rs.get(i).right*Values.multi, rs.get(i).bottom*Values.multi, r1);}
-            else { canvas.drawRect(rm.get(i), r2); }
+            canvas.drawRect(rm.get(i).left*Values.multi, rm.get(i).top*Values.multi, rm.get(i).right*Values.multi, rm.get(i).bottom*Values.multi, r1);}
         }
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
