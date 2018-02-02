@@ -28,7 +28,7 @@ sometimes become confused. More advanced classification functions or more
 granular fingerprints could improve these readings.
 
 ## Contributors
-@KaliumPuceon, @ForeverANoob and @nyashabryan were responsible for this project
+[@KaliumPuceon](https://github.com/KaliumPuceon), [@ForeverANoob](https://github.com/ForeverANoob) and [@nyashabryan](https://github.com/nyashabryan) were responsible for this project
 during the internship.
 
 ## Tools
