@@ -14,6 +14,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/*
+ *
+ * This is the loading activity which accesses the Firebase database and creates
+ * a floor object that is then passed on to the rest of the program.
+ *
+ */
+
 public class LoadUpActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
