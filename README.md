@@ -38,5 +38,5 @@ used to get fingerprints and make them suitable for upload, which will be added
 to the repository soon.
 
 ## License
-This project is licensed under the GNU GPL, see the LICENSE file for the entire
+This project is licensed under Apache 2.0, see the LICENSE file for the entire
 license.
