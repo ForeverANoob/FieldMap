@@ -8,6 +8,32 @@ import java.util.ArrayList;
 
 public class Floor{
 
+    /*
+     *
+     * The floor object is generated to store the database of mac addresses
+     * locally while the program is running. It allows the fingerprinting
+     * system to drill down in both structure and complexity to figure out
+     * which room the user is in. In the final prototype, areas and rooms
+     * were merged into a single unit, this is not reflected outside the
+     * database itself.
+     *
+     */
+
+    /*
+     *
+     * Object Structure:
+     *
+     * A Floor has a name and many Rooms
+     * - A Room has a unique ID, a name, and many Areas
+     *   -An Area has a unique ID, and an array of Mac Addresses
+     *      -A Mac has a max strength, a min strength and an address
+     *
+     * The Database handler creates an object representing an entire floor at a
+     * time, which is used by the rest of the program. This data is horrifically
+     * incomplete and could be Really, Really improved if we had more time.
+     *
+     */
+
     private List<Room> listOfRooms;
     private int floorID;
     private String floorName;
@@ -53,7 +79,7 @@ public class Floor{
     }
     /* Room Class */
 
-    class Room{
+    class Room{ //Room Class Starts here
 
         private List<Area> listOfAreas = new ArrayList<Area>();
         private int roomID;
@@ -112,8 +138,9 @@ public class Floor{
 
     }
 
+    //Room Class Ends
 
-    class Area{
+    class Area{ //Area Class starts here
 
         private List<Mac> listOfMacs = new ArrayList<Mac>();
         private int areaID;
@@ -156,7 +183,9 @@ public class Floor{
         }
     }
 
-    class Mac{
+    //Area Class ends her
+
+    class Mac{ //Mac class starts here
 
         private String address;
         private int highRead;
@@ -200,4 +229,5 @@ public class Floor{
             this.lowRead = lowRead;
         }
     }
+    //Mac Class ends here
 }

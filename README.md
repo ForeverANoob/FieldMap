@@ -38,5 +38,26 @@ used to get fingerprints and make them suitable for upload, which will be added
 to the repository soon.
 
 ## License
-This project is licensed under the GNU GPL, see the LICENSE file for the entire
+This project is licensed under Apache 2.0, see the LICENSE file for the entire
 license.
+
+## Some notes on internal operation
+This app is a slightly convoluted thing because the authors are all novices. In
+this regard, here's a primer on the internals.
+
+On creation, the LoadUpActivity calls on a Firebase database and produces a Floor
+object, which is then passed on to the rest of the program. The Floor is loaded
+into a Classifier, which can be called on to find out which Room the user is in.
+The CustomView calls the Classifier every few seconds, and takes the Room object
+it produces. This Room object is used by the Map and Graph to find out where the
+user is in space. That information is used by the Map to draw the user in the
+layout of the office. The Graph plots a path from the user position to their
+target, and the Map draws this onto the layout of the office. There are several
+helper classes that assist this.
+
+If you have questions about any single section, these people probably know them
+best:
+
+* Database: @NyashaBryan
+* Classifier: @KaliumPuceon
+* Drawing System: @ForeverANoob

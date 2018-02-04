@@ -23,6 +23,10 @@ import java.util.Scanner;
 
 /**
  * Created by Andre S Barreiros on 1/25/2018.
+ *
+ * ALSO I THINK THIS IS NO-LONGER NECESSARY, DELETE IF CLEAR @ForeverANoob
+ *
+ * -@KaliumPuceon
  */
 
 public class SaveFile extends Activity{

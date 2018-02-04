@@ -17,8 +17,13 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.logging.LogRecord;
 
-/**
+/*
  * Created by Andre S Barreiros on 1/24/2018.
+ *
+ * This view handles drawing a map of the office out, with a path
+ *
+ * Comments may be incomplete: So far these are done by Kalium and they didn't
+ * write most of this.
  */
 
 public class CustomView extends View {
@@ -143,7 +148,7 @@ public class CustomView extends View {
                 //updateStatus(); //this function can change value of mInterval.
                 setUserLoc();
                 graph.setLocation(Integer.toString(u.getLoc()[0]/Values.TILESIZE)+" "+Integer.toString(u.getLoc()[1]/Values.TILESIZE));
-                System.out.println("+++++++++++++++++++++++++++++++");
+                //System.out.println("+++++++++++++++++++++++++++++++");
                 redraw();
 
                 //recreate();

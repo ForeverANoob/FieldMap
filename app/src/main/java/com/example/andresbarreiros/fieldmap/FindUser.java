@@ -9,6 +9,13 @@ import java.util.HashMap;
  * Created by Andre S Barreiros on 1/25/2018.
  */
 
+/*
+ *
+ * I think this uses a hilariously hardcoded grid lookup to ID the user's location
+ * within the office grid
+ *
+ */
+
 public class FindUser {
 
     HashMap<String, String> hm = new HashMap<String, String>(); // <id, location>
